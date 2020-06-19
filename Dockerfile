@@ -1,3 +1,1 @@
-FROM gcc
-ENV command ""
-CMD ${command}
+CMD ["echo", "Hello world"]
