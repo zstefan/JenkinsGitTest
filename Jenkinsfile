@@ -1,29 +1,26 @@
-pipeline {
-agent any
-stages {
-    stage('List all') {
-        steps {
-           sh 'ls'
+node {
+    def app
+
+    stage('Clone repository') {
+        /* Let's make sure we have the repository cloned to our workspace */
+
+        checkout scm
+    }
+
+    stage('Build image') {
+        /* This builds the actual image; synonymous to
+         * docker build on the command line */
+
+        app = docker.build("getintodevops/hellonode")
+    }
+
+    stage('Test image') {
+        /* Ideally, we would run a test framework against our image.
+         * For this example, we're using a Volkswagen-type approach ;-) */
+
+        app.inside {
+            sh 'echo "Tests passed"'
         }
     }
-    // stage('Clone') {
-    //     steps {
-    //         git branch: 'master', url: 'https://github.com/lvthillo/maven-hello-world.git'
-    //         stash name:'scm', includes:'*'
-    //     }
-    // }
-
-    // stage('Build in Docker') {
-    //     steps {
-    //         unstash 'scm'
-    //         script{
-    //             docker.image('maven:3.5.2').inside{ 
-    //                 sh 'pwd'
-    //                 sh 'mvn -v'
-    //                 sh 'mvn clean install'
-    //             }
-    //         }
-    //     }
-    // }
-}
+    
 }
