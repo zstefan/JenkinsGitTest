@@ -12,7 +12,7 @@ node {
          * docker build on the command line */
 
         //app = docker.build("getintodevops/hellonode")
-        sh 'sudo docker --version'
+        sh 'docker --version'
     }
 
     stage('Test image') {
