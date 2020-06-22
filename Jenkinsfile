@@ -13,6 +13,7 @@ node('OTE_Agent')  {
 
         //app = docker.build("getintodevops/hellonode")
         sh 'docker --version'
+        sh 'mkdir testDir'
     }
 
     stage('Test image') {
