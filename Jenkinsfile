@@ -12,8 +12,11 @@ node('OTE_Agent')  {
          * docker build on the command line */
 
         //app = docker.build("getintodevops/hellonode")
-        sh 'docker --version'
-        sh 'mkdir testDir'
+        docker { image 'zenterio_tools' }
+        docker.run("--rm -v /home/syrmia/dt-eu-stb-ote/dt-eu-stb-ote-zids:/work -w /work -e 
+            command=\"zmake ZSYS_PRODUCT=HUGIN02_NETFRONT_BCM7356_DSI810H_NDS bootimage ndsimage -j4\" ")
+        //sh 'docker --version'
+        //sh 'mkdir testDir'
     }
 
     stage('Test image') {
