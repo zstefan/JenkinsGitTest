@@ -1,4 +1,4 @@
-node {
+node('OTE_Agent')  {
     def app
 
     stage('Clone repository') {
